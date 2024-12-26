@@ -62,7 +62,13 @@ impl JupiterSwap {
         let float_amount = raw_amount as f64 / (10_f64.powi(decimals as i32));
         Ok((float_amount, raw_amount, decimals))
     }
-
+    pub fn get_sol_balance(&self) -> Result<(f64, u64, u8)> {
+        let balance = self.client.get_balance(&self.payer.pubkey())?;
+        let decimals = 9;
+        let raw_amount = balance;
+        let float_amount = raw_amount as f64 / (10_f64.powi(decimals as i32));
+        Ok((float_amount, raw_amount, decimals))
+    }
     pub async fn execute_swap(&self, quote_response: QuoteResponse) -> Result<String> {
         let priority_fee = 0.005 * solana_sdk::native_token::LAMPORTS_PER_SOL as f64;
         let swap_request = SwapRequest {

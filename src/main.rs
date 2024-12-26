@@ -26,12 +26,11 @@ async fn main() -> Result<(), anyhow::Error> {
 
     println!("Solana Token Assistant Ready! (Type 'exit' to quit)");
     println!("Examples:");
-    println!("1. Show top holders for token address ABC...");
-    println!("2. Swap 1 SOL to USDC");
-    println!("3. Transfer 0.5 SOL to address ABC...");
-    println!("4. Transfer 10 USDC to address ABC...");
+    println!("1. Swap 1 SOL to USDC");
+    println!("2. Transfer 0.5 SOL to address ABC...");
+    println!("3. Transfer 10 USDC to address ABC...");
     
-    // let input = "Transfer 1 USDC (EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v) to 5QfQ88NscBcLjTvpVfid3Qa268WF4awdphx1pZswwzw7";
+    // let input = "swap 0.01 sol to rina (6wUfdjiBtXjiWTfwGabBqybVTCAFoS9iD3X6t9v1pump) with slippage 1%";
     // let response = agent.prompt(input).await?;
     // println!("Response: {}", response);
 

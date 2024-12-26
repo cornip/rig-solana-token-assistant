@@ -69,9 +69,13 @@ impl Tool for SwapTool {
     async fn call(&self, args: Self::Args) -> Result<Self::Output, Self::Error> {
         let input_mint = Pubkey::from_str(&args.input_mint)
             .map_err(|_| SwapError::InvalidMintAddress("input_mint".to_string()))?;
-        
-        let (_, raw_balance, decimals) = self.jupiter_swap.get_token_balance(&input_mint)
-            .map_err(|e| SwapError::JupiterError(e.to_string()))?;
+        let (_, raw_balance, decimals) = if &args.input_mint == "So11111111111111111111111111111111111111112" {
+            self.jupiter_swap.get_sol_balance()
+                .map_err(|e| SwapError::JupiterError(e.to_string()))?
+        } else {
+            self.jupiter_swap.get_token_balance(&input_mint)
+                .map_err(|e| SwapError::JupiterError(e.to_string()))?
+        };
 
         let raw_amount = if args.amount.ends_with('%') {
             let percentage = args.amount
